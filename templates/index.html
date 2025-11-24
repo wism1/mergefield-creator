@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Merge Field Creator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Merge Field Creator</h1>
+            <p>Drag and drop to create complex Word merge fields.</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h2>Toolbox</h2>
+                <div class="draggable-item" draggable="true" data-type="simple">
+                    <span class="icon">📄</span> Simple Field
+                </div>
+                <div class="draggable-item" draggable="true" data-type="if">
+                    <span class="icon">🔀</span> IF Condition
+                </div>
+                <div class="draggable-item" draggable="true" data-type="check_empty">
+                    <span class="icon">❓</span> Check Empty
+                </div>
+                <div class="draggable-item" draggable="true" data-type="text">
+                    <span class="icon">📝</span> Free Text
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 1rem 0;">
+
+                <div style="text-align: center;">
+                    <input type="file" id="import-file" accept=".txt" style="display: none;">
+                    <button id="import-btn" class="secondary-btn" style="width: 100%;">📂 Import Fields</button>
+                    <small style="display: block; margin-top: 5px; color: #64748b;">Select .txt file</small>
+                </div>
+
+                <!-- Hidden Datalist for Autocomplete -->
+                <datalist id="field-list"></datalist>
+
+                <div class="actions">
+                    <button id="copy-btn" class="primary-btn">Copy to Clipboard</button>
+                </div>
+
+                <div id="status-msg" class="status"></div>
+            </div>
+
+            <div class="workspace">
+                <div class="workspace-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2>Workspace</h2>
+                    <div class="controls" style="display: flex; gap: 10px; align-items: center;">
+                        <label class="switch">
+                            <input type="checkbox" id="view-toggle-checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span style="font-size: 0.875rem; color: var(--text-secondary);">Tree View</span>
+
+                        <button id="reset-view-btn" class="secondary-btn"
+                            style="display: none; padding: 0.25rem 0.5rem; font-size: 0.75rem;">Reset Zoom</button>
+                        <button id="clear-header-btn" class="secondary-btn"
+                            style="display: none; padding: 0.25rem 0.5rem; font-size: 0.75rem; color: #ef4444; border-color: #ef4444;">Clear
+                            All</button>
+                    </div>
+                </div>
+
+                <div id="drop-zone" class="drop-zone">
+                    <p class="placeholder">Drag a field here to start</p>
+                </div>
+
+                <div id="tree-view" class="tree-view" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
